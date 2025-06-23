@@ -1,5 +1,6 @@
 package application;
 
+import boardgame.Piece;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -69,6 +70,9 @@ public class UI {
         System.out.println();
         System.out.println("Turn : " + chessMatch.getTurn());
         System.out.println("Waiting player : " + chessMatch.getCurrentPlayer());
+        if (chessMatch.getCheck()) {
+            System.out.println("CHECK");
+        }
     }
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
         for (int i = 0; i < pieces.length; i++) {

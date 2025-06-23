@@ -1,6 +1,5 @@
 package application;
 
-import boardgame.Piece;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -38,7 +37,6 @@ public class UI {
         System.out.flush();
     }
 
-
     public static ChessPosition readChessPosition(Scanner sc) {
         try {
             String s = sc.nextLine();
@@ -48,7 +46,6 @@ public class UI {
         } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are a1 to h8");
         }
-
     }
 
 
@@ -69,11 +66,18 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turn : " + chessMatch.getTurn());
-        System.out.println("Waiting player : " + chessMatch.getCurrentPlayer());
-        if (chessMatch.getCheck()) {
-            System.out.println("CHECK");
+        if (!chessMatch.getCheckMate()) {
+            System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+            if (chessMatch.getCheck()) {
+                System.out.println("CHECK!");
+            }
+        }
+        else {
+            System.out.println("CHECKMATE!");
+            System.out.println("Winner: " + chessMatch.getCurrentPlayer());
         }
     }
+
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
